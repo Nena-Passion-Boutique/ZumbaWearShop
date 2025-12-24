@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Passion Boutique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05060a;
+      --card: rgba(255, 255, 255, 0.04);
+      --accent: #ff5f6d;
+      --accent-2: #ffc371;
+      --text: #f5f5f5;
+      --muted: #9ca3af;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top, #151826 0, #05060a 50%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+    }
+
+    .brand-block {
+      text-align: center;
+    }
+
+    .brand-block h1 {
+      font-size: clamp(1.4rem, 4vw, 2.1rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .brand-block p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* HERO */
+    .hero {
+      margin: 10px 0 20px;
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(255, 95, 109, 0.15), rgba(255, 195, 113, 0.07));
+      border: 1px solid rgba(255, 195, 113, 0.4);
+      box-shadow: 0 0 18px rgba(255, 95, 109, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .btn-primary, .btn-outline {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #111;
+      box-shadow: 0 0 12px rgba(255, 95, 109, 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* FILTERS */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .filters label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .filters select, .filters input {
+      background-color: rgba(15, 23, 42, 0.8);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text);
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    /* GRID DE PRODUCTOS */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .product-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 0 16px rgba(15, 23, 42, 0.8);
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 6px;
+    }
+
+    .product-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .product-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-2);
+    }
+
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+      gap: 8px;
+    }
+
+    .size-tag {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .btn-wa {
+      flex: 1;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: #25d366;
+      color: #062c1b;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.3);
+      padding-top: 14px;
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      header {
+        flex-direction: row;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img src="logo-left.png" alt="Logo Izquierdo" class="logo">
+    <div class="brand-block">
+      <h1>PASSION BOUTIQUE</h1>
+      <p>Ropa seleccionada · Envíos nacionales</p>
+    </div>
+    <img src="logo-right.png" alt="Logo Derecho" class="logo">
+  </header>
+
+  <!-- HERO / BANNER -->
+  <section class="hero">
+    <div class="hero-title">🔥 Nueva colección · Street & Casual</div>
+    <div class="hero-sub">
+      Prendas seleccionadas, stock limitado y atención directa por WhatsApp.
+      Pide fotos extra, medidas y opciones de envío.
+    </div>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="scrollToProducts()">Ver productos</button>
+      <button class="btn-outline" onclick="openWhatsAppGenerico()">
+        Preguntar por tallas y envíos
+      </button>
+    </div>
+  </section>
+
+  <!-- FILTROS -->
+  <section class="filters">
+    <div>
+      <label for="filterSearch">Buscar:</label>
+      <input id="filterSearch" type="text" placeholder="Playeras, sudaderas, jeans..." oninput="applyFilters()">
+    </div>
+    <div>
+      <label for="filterCategory">Categoría:</label>
+      <select id="filterCategory" onchange="applyFilters()">
+        <option value="">Todas</option>
+        <option value="playera">Playeras</option>
+        <option value="sudadera">Sudaderas</option>
+        <option value="pantalon">Pantalones</option>
+        <option value="accesorio">Accesorios</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section id="products" class="products-grid">
+    <!-- Ejemplo 1 -->
+    <article class="product-card" data-category="playera" data-name="Playera Oversize Negra">
+      <div class="product-img" style="background-image:url('playera-negra.jpg');"></div>
+      <div class="product-title">Playera oversize negra</div>
+      <div class="product-meta">
+        <span>Unisex</span>
+        <span>Ref: P-001</span>
+      </div>
+      <div class="product-price">$650 MXN</div>
+      <div class="product-actions">
+        <span class="size-tag">Tallas: S, M, L</span>
+        <button class="btn-wa"
+          onclick="sendWhatsAppProducto('Playera oversize negra', 'P-001', '$650 MXN', 'S, M, L')">
+          WhatsApp
+        </button>
+      </div>
+    </article>
+
+    <!-- Ejemplo 2 -->
+    <article class="product-card" data-category="sudadera" data-name="Sudadera Hoodie Arena">
+      <div class="product-img" style="background-image:url('sudadera-arena.jpg');"></div>
+      <div class="product-title">Sudadera hoodie color arena</div>
+      <div class="product-meta">
+        <span>Algodón premium</span>
+        <span>Ref: S-010</span>
+      </div>
+      <div class="product-price">$950 MXN</div>
+      <div class="product-actions">
+        <span class="size-tag">Tallas: M, L</span>
+        <button class="btn-wa"
+          onclick="sendWhatsAppProducto('Sudadera hoodie color arena', 'S-010', '$950 MXN', 'M, L')">
+          WhatsApp
+        </button>
+      </div>
+    </article>
+
+    <!-- Ejemplo 3 -->
+    <article class="product-card" data-category="pantalon" data-name="Jeans Slim Azul">
+      <div class="product-img" style="background-image:url('jeans-azules.jpg');"></div>
+      <div class="product-title">Jeans slim azul oscuro</div>
+      <div class="product-meta">
+        <span>Fit slim</span>
+        <span>Ref: J-020</span>
+      </div>
+      <div class="product-price">$890 MXN</div>
+      <div class="product-actions">
+        <span class="size-tag">Tallas: 30, 32, 34</span>
+        <button class="btn-wa"
+          onclick="sendWhatsAppProducto('Jeans slim azul oscuro', 'J-020', '$890 MXN', '30, 32, 34')">
+          WhatsApp
+        </button>
+      </div>
+    </article>
+
+    <!-- Agrega más productos duplicando el bloque <article> -->
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 PatronesMx Closet · Ropa seleccionada</span>
+    <span>Atención por WhatsApp · Envíos a todo México</span>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    const WHATSAPP_NUMERO_1 = "16692867303";
+
+    function scrollToProducts() {
+      document.getElementById("products").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function openWhatsAppGenerico() {
+      const msg =
+        "Hola! Me gustaría recibir más información sobre la ropa disponible, tallas y opciones de envío. " +
+        "¿Podrías compartirme detalles y fotos de lo que tengas en stock?";
+      const enc = encodeURIComponent(msg);
+      window.open(`https://wa.me/${WHATSAPP_NUMERO_1}?text=${enc}`, "_blank");
+    }
+
+
+      const encoded = encodeURIComponent(mensaje);
+
+      // Abrir en dos números (como en tu flujo de tickets)
+      window.open(`https://wa.me/${WHATSAPP_NUMERO_1}?text=${encoded}`, "_blank");
+      setTimeout(() => {
+        window.open(`https://wa.me/${WHATSAPP_NUMERO_2}?text=${encoded}`, "_blank");
+      }, 600);
+    }
+
+    function applyFilters() {
+      const search = document.getElementById("filterSearch").value.toLowerCase().trim();
+      const category = document.getElementById("filterCategory").value;
+      const cards = document.querySelectorAll(".product-card");
+
+      cards.forEach(card => {
+        const cardName = (card.dataset.name || "").toLowerCase();
+        const cardCat = card.dataset.category || "";
+
+        const matchesSearch = !search || cardName.includes(search);
+        const matchesCat = !category || cardCat === category;
+
+        card.style.display = (matchesSearch && matchesCat) ? "" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
