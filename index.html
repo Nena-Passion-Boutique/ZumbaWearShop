@@ -49,7 +49,7 @@
     }
 
     .logo {
-      height: 50px;
+      height: 90px;
       width: auto;
     }
 
@@ -58,14 +58,14 @@
     }
 
     .brand-block h1 {
-      font-size: clamp(1.4rem, 4vw, 2.1rem);
-      letter-spacing: 2px;
+      font-size: clamp(2rem, 2vw, 1.1rem);
+      letter-spacing: 1px;
       text-transform: uppercase;
     }
 
     .brand-block p {
-      font-size: 0.9rem;
-      color: var(--muted);
+      font-size: 2rem;
+      color: #05f9e5;
       margin-top: 4px;
     }
 
@@ -249,6 +249,14 @@
         flex-direction: column;
         text-align: center;
       }
+
+      .size-info {
+  font-size: 20px;        /* smaller text */
+  margin-top: 4px;        /* tighter spacing */
+  color: #10dbff;            /* softer color */
+  line-height: 1.2;       /* compact line height */
+}
+
     }
   </style>
 </head>
@@ -266,7 +274,7 @@
 
   <!-- HERO / BANNER -->
   <section class="hero">
-    <div class="hero-title">🔥 Nueva colección · Street & Casual</div>
+    <div class="hero-title">🔥 Nueva colección · Zumba Wear</div>
     <div class="hero-sub">
       Prendas seleccionadas, stock limitado y atención directa por WhatsApp.
       Pide fotos extra, medidas y opciones de envío.
@@ -298,24 +306,92 @@
   </section>
 
   <!-- PRODUCTOS -->
-  <section id="products" class="products-grid">
-    <!-- Ejemplo 1 -->
-    <article class="product-card" data-category="playera" data-name="Playera Oversize Negra">
-      <div class="product-img" style="background-image:url('playera-negra.jpg');"></div>
-      <div class="product-title">Playera oversize negra</div>
-      <div class="product-meta">
-        <span>Unisex</span>
-        <span>Ref: P-001</span>
+<section id="products" class="products-grid">
+  <article class="product-card" data-category="playera" data-name="Playera Oversize Negra">
+    <div class="product-img" style="background-image:url('Z1T001011.jpg');"></div>
+
+    <div class="product-title">Blue Jean Baseball Button-Up Jersey</div>
+
+    <div class="product-meta">
+      <span>Unisex</span>
+      <span>Ref: Z1T001011</span>
+    </div>
+
+    <div class="product-price">$60 USD</div>
+
+    <div class="product-actions">
+
+      <!-- SIZE DROPDOWN -->
+      <label>Size:</label>
+      <select id="size-Z1T001011" onchange="showQty('Z1T001011')">
+        <option value="">Select size</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+      </select>
+
+      <!-- Show "Size: S Qty: 3" -->
+      <div id="info-Z1T001011" class="size-info"></div>
       </div>
-      <div class="product-price">$650 MXN</div>
-      <div class="product-actions">
-        <span class="size-tag">Tallas: S, M, L</span>
-        <button class="btn-wa"
-          onclick="sendWhatsAppProducto('Playera oversize negra', 'P-001', '$650 MXN', 'S, M, L')">
-          WhatsApp
-        </button>
-      </div>
-    </article>
+      <!-- WhatsApp Button -->
+      <button class="btn-wa"
+        onclick="sendWhatsAppProducto(
+          'Blue Jean Baseball Button-Up Jersey',
+          'Z1T001011',
+          '$60 USD',
+          document.getElementById('size-Z1T001011').value,
+          document.getElementById('info-Z1T001011').dataset.qty
+        )">
+        Buy
+      </button>
+
+    </div>
+  </article>
+
+<script>
+  /* STOCK PER SIZE */
+  const stockData = {
+    "Z1T001011": {
+      S: 3,
+      M: 5,
+      L: 0
+    }
+  };
+
+  /* SHOW ONLY QTY AVAILABLE FOR SELECTED SIZE */
+  function showQty(ref) {
+    const sizeSelect = document.getElementById(`size-${ref}`);
+    const infoBox = document.getElementById(`info-${ref}`);
+
+    const size = sizeSelect.value;
+
+    if (!size) {
+      infoBox.textContent = "";
+      infoBox.dataset.qty = "";
+      return;
+    }
+
+    const qtyAvailable = stockData[ref][size];
+
+    infoBox.textContent = `Size: ${size} Qty: ${qtyAvailable}`;
+    infoBox.dataset.qty = qtyAvailable; // store qty for WhatsApp
+  }
+
+  /* WHATSAPP MESSAGE */
+  function sendWhatsAppProducto(name, ref, price, size, qty) {
+    const msg = `Hello! I'm interested in:
+- ${name}
+- Ref: ${ref}
+- Price: ${price}
+- Size: ${size}
+- Quantity available: ${qty}`;
+
+    const url = "https://wa.me/5210000000000?text=" + encodeURIComponent(msg);
+    window.open(url, "_blank");
+  }
+</script>
+
+
 
     <!-- Ejemplo 2 -->
     <article class="product-card" data-category="sudadera" data-name="Sudadera Hoodie Arena">
